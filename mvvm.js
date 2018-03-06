@@ -28,9 +28,9 @@ function observer(data){
 function classObserver(data){//主要逻辑
     for(let key in data){//将data中的数据通过object.defineProperty方式定义属性
         let val = data[key];
-        if(typeof val === 'object'){
+        //if(typeof val === 'object'){//这里再observer方法中做了对象检测的处理，所以注释掉;
             observer(val);
-        }
+        //}
         Object.defineProperty(data,key,{
             enumerable:true,
             get(){
