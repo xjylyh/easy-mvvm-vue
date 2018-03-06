@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MVVM</title>
+</head>
+<body>
+    <!-- MVVM 双向数据绑定  angular->脏值检测  vue->数据劫持+发布订阅模式 -->
+    <!-- vue->ie8+  Object.defineProperty -->
+</body>
+<script>
+    // 默认用Object.defineProperty定义的对象
+    // 1.不可更改，如删除 2.不可写  3.不可枚举
+    let obj = {};
+    Object.defineProperty(obj,'name',{
+        configurable:true,//可配置的
+        // writable:true,//可写的
+        enumerable:true,//可枚举的
+        // value:'jiyao',
+        get(){//获取obj.name的值时 会调用get方法
+            return 'jiyao';
+        },
+        set(val){//obj.name = 'xjylyh'
+            console.log(val);
+        }
+    })
+    // delete obj.name;//configurable为true可以删除对象
+    //obj.name = 'xjylyh';//writable为true可以使对象可写
+        console.log(obj.name);
+</script>
+</html>
