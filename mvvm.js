@@ -17,8 +17,22 @@ function xjy(options = {}){
         })
     }
     console.log(options.el);
+    initComputed.call(this);
     new Compole(options.el,this);
 }
+
+function initComputed(){
+    let vm = this;
+    let computed = vm.$options.computed;
+    Object.keys(computed).forEach((k)=>{
+        Object.defineProperty(vm,k,{
+            get:typeof computed[k]==='function'?computed[k]:computed[k].get,
+            set(){}
+        })
+        console.log(vm[k]);
+    })
+}
+
 //观察对象给对象增加Object.defineProperty()
 function observe(data){//observe->观察
     if(typeof data!=='object') return;
