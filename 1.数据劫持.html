@@ -10,6 +10,11 @@
     <div id="app">
         <div>my name: {{info.name}}</div>
         <div>my age: {{info.age}}</div>
+        <div>value:{{b}}</div>
+        <input type="text" v-module="b">
+        <button class="mvvm">
+            click me
+        </button>
     </div>
 </body>
 <script src="./mvvm.js"></script>
@@ -20,9 +25,17 @@
             info:{
                 name:'xjy',
                 age:24
-            }
+            },
+            b:'10'
         }
     });
-    console.log(xjylyh);
+window.onload = function(){
+    var btn = document.getElementsByClassName('mvvm')[0];
+    console.log(btn);
+    btn.addEventListener('click',function(){
+         xjylyh.info.name = 'xjylyh';
+    },false)
+}
+    
 </script>
 </html>

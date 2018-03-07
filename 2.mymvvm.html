@@ -10,6 +10,9 @@
     <div id="app">
         <div> my name is : {{info.name}} </div>
         <div> I am {{info.age}} years old </div>
+        <div>value:{{info.b}}</div>
+        <input type="text" v-module="info.b">
+        <button class="mvvm">click me</button>
     </div>
 </body>
 <script src="./mymvvm.js"></script>
@@ -19,9 +22,17 @@
         data:{
             info:{
                 name:'jiyao',
-                age:'22'
+                age:'22',
+                b:'28k'
             }
         }
     })
+    window.onload = function(){
+        var btn = document.getElementsByClassName('mvvm')[0];
+        console.log(btn);
+        btn.addEventListener('click',function(){
+            vm.info.name = (Math.random()*10)+'xjy';
+        },false)
+    }
 </script>
 </html>
