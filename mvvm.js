@@ -16,7 +16,6 @@ function xjy(options = {}){
             }
         })
     }
-    console.log(options.el);
     initComputed.call(this);
     new Compole(options.el,this);
 }
@@ -29,7 +28,6 @@ function initComputed(){
             get:typeof computed[k]==='function'?computed[k]:computed[k].get,
             set(){}
         })
-        console.log(vm[k]);
     })
 }
 
@@ -67,7 +65,6 @@ function classobserve(data){//主要逻辑
 function Compole(el,xjy){
     //el表示替换的范围，在这个范围之外不必管他
     xjy.$el = document.querySelector(el);
-    console.log(xjy.$el);
     let fragment = document.createDocumentFragment();
     while(child = xjy.$el.firstChild){//将替换范围之内的东西拿到内存中
         fragment.appendChild(child);
@@ -76,6 +73,7 @@ function Compole(el,xjy){
 
     function rpls(fragment){//匹配元素节点进行替换
         Array.from(fragment.childNodes).forEach((node)=>{//循环每一层dom
+            console.log(node);
             let text = node.textContent;
             let reg = /\{\{(.*)\}\}/;
             if(node.nodeType === 3 && reg.test(text)){
@@ -92,9 +90,7 @@ function Compole(el,xjy){
             }
             if(node.nodeType === 1){
                 let nodeAttrs = node.attributes;
-                console.log(nodeAttrs);
                 Array.from(nodeAttrs).forEach((attr)=>{
-                    console.log(attr.name);
                     let name = attr.name;
                     let str = 'v-';
                     let exp = attr.value;
@@ -133,9 +129,7 @@ Dep.prototype.addsub = function(sub){//完成订阅事件队列
 }
 
 Dep.prototype.notify = function(){
-    console.log(this.subs);
     this.subs.forEach((sub)=>{
-        console.log(sub);
         sub.update();
     });
 }
